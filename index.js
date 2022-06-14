@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const middleware = require('./middleware');
 const api = require('./api');
+const cars = require('./routes/cars');
 
 // const port = process.env.port ?? 3000
 const port = 80
@@ -11,6 +12,7 @@ app.use(express.static(path.resolve(__dirname,'static')))
 app.use(middleware.requstTime)
 app.use(middleware.logger)
 
+app.use('/api2',cars)
 
 
 // app.get('/',(req,res)=>{
@@ -22,7 +24,9 @@ app.use(middleware.logger)
 //     res.sendFile(path.resolve(__dirname,'static','post.html'))
 // })
 
+
 app.get('/api',api.getServers)
+
 
 app.listen(port, ()=>{
     console.log(`Server has been started on port ${port}...`)
